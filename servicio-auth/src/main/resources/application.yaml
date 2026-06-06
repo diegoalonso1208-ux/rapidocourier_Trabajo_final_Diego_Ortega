@@ -1,0 +1,42 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: servicio-auth
+  autoconfigure:
+    exclude:
+      - org.springframework.cloud.config.client.ConfigClientAutoConfiguration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth_db
+    username: admin
+    password: admin123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  cloud:
+    config:
+      enabled: false
+    vault:
+      enabled: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+jwt:
+  secret: clave-super-secreta-rapidocourier-2024-hmac512-segura-para-produccion-minimo-64-caracteres
+  expiration: 86400000

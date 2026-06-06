@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+
+  postgres-auth:
+    image: postgres:15
+    container_name: postgres-auth
+    environment:
+      POSTGRES_DB: auth_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5432:5432"
+    networks:
+      - rapidocourier-net
+
+  postgres-clientes:
+    image: postgres:15
+    container_name: postgres-clientes
+    environment:
+      POSTGRES_DB: clientes_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5433:5432"
+    networks:
+      - rapidocourier-net
+
+  postgres-paquetes:
+    image: postgres:15
+    container_name: postgres-paquetes
+    environment:
+      POSTGRES_DB: paquetes_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5434:5432"
+    networks:
+      - rapidocourier-net
+
+  mongodb-tarifas:
+    image: mongo:6
+    container_name: mongodb-tarifas
+    environment:
+      MONGO_INITDB_DATABASE: tarifas_db
+    ports:
+      - "27017:27017"
+    networks:
+      - rapidocourier-net
+
+  vault:
+    image: hashicorp/vault:1.15
+    container_name: vault
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: myroot
+      VAULT_DEV_LISTEN_ADDRESS: 0.0.0.0:8200
+    ports:
+      - "8200:8200"
+    cap_add:
+      - IPC_LOCK
+    networks:
+      - rapidocourier-net
+
+networks:
+  rapidocourier-net:
+    driver: bridge
