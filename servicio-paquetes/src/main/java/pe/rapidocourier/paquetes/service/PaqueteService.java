@@ -40,8 +40,8 @@ public class PaqueteService {
         ClienteResponse remitente;
         ClienteResponse destinatario;
         try {
-            remitente = clienteClient.obtenerPorDni(request.getDniRemitente());
-            destinatario = clienteClient.obtenerPorDni(request.getDniDestinatario());
+            remitente = clienteClient.obtenerPorDni(request.getDniRemitente()).getData();
+            destinatario = clienteClient.obtenerPorDni(request.getDniDestinatario()).getData();
         } catch (Exception e) {
             throw new ExternalServiceException(
                     "Error al consultar servicio-clientes: " + e.getMessage());

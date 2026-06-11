@@ -38,27 +38,26 @@ public class ClienteService {
                     "El DNI ya está registrado: " + request.getDni());
         }
 
-        ReniecResponse reniec;
+        String nombreCompleto;
         try {
-            reniec = reniecClient.consultarDni(request.getDni(), reniecToken);
+            ReniecResponse reniec = reniecClient.consultarDni(request.getDni(), reniecToken);
+            if (reniec != null && reniec.getNombreCompleto() != null) {
+                nombreCompleto = reniec.getNombreCompleto();
+            } else {
+                nombreCompleto = "Cliente DNI-" + request.getDni();
+            }
         } catch (Exception e) {
-            throw new ExternalServiceException(
-                    "Error al consultar RENIEC: " + e.getMessage());
-        }
-
-        if (reniec == null || reniec.getNombreCompleto() == null) {
-            throw new ExternalServiceException("RENIEC no retornó datos válidos");
+            nombreCompleto = "Cliente DNI-" + request.getDni();
         }
 
         Cliente cliente = new Cliente();
         cliente.setDni(request.getDni());
-        cliente.setNombreCompleto(reniec.getNombreCompleto());
+        cliente.setNombreCompleto(nombreCompleto);
         cliente.setEmail(request.getEmail());
         cliente.setTelefono(request.getTelefono());
 
         return toResponse(clienteRepository.save(cliente));
     }
-
     public ClienteResponse fallbackReniec(ClienteRequest request, Exception ex) {
         throw new ExternalServiceException(
                 "Servicio RENIEC no disponible: " + ex.getMessage());

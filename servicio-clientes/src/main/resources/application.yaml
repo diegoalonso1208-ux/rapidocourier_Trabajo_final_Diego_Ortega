@@ -37,7 +37,7 @@ management:
         include: "*"
 
 reniec:
-  token: ${RENIEC_TOKEN:Bearer tu-token-aqui}
+  token: sk_16259.KBfu9gnui9vbUjjdMBEy6eD4U3jWIYfI
 
 resilience4j:
   circuitbreaker:

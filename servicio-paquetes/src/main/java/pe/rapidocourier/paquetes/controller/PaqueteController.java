@@ -32,14 +32,14 @@ public class PaqueteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<PaqueteResponse>> obtenerPorId(
-            @PathVariable UUID id) {
+            @PathVariable("id") UUID id) {
         return ResponseEntity.ok(ApiResponse.success("Paquete encontrado",
                 paqueteService.obtenerPorId(id)));
     }
 
     @PatchMapping("/{id}/estado")
     public ResponseEntity<ApiResponse<PaqueteResponse>> actualizarEstado(
-            @PathVariable UUID id,
+            @PathVariable("id") UUID id,
             @Valid @RequestBody EstadoRequest request) {
         return ResponseEntity.ok(ApiResponse.success("Estado actualizado",
                 paqueteService.actualizarEstado(id, request)));
@@ -47,7 +47,7 @@ public class PaqueteController {
 
     @GetMapping("/{id}/historial")
     public ResponseEntity<ApiResponse<List<HistorialResponse>>> obtenerHistorial(
-            @PathVariable UUID id) {
+            @PathVariable("id") UUID id) {
         return ResponseEntity.ok(ApiResponse.success("Historial obtenido",
                 paqueteService.obtenerHistorial(id)));
     }
@@ -70,14 +70,14 @@ public class PaqueteController {
 
     @PostMapping("/{id}/categorias/{categoriaId}")
     public ResponseEntity<ApiResponse<PaqueteResponse>> asignarCategoria(
-            @PathVariable UUID id,
-            @PathVariable UUID categoriaId) {
+            @PathVariable("id") UUID id,
+            @PathVariable("categoriaId") UUID categoriaId) {
         return ResponseEntity.ok(ApiResponse.success("Categoría asignada",
                 paqueteService.asignarCategoria(id, categoriaId)));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable UUID id) {
+    public ResponseEntity<Void> eliminar(@PathVariable("id") UUID id) {
         paqueteService.eliminar(id);
         return ResponseEntity.noContent().build();
     }

@@ -42,7 +42,7 @@ public class ClienteController {
 
     @GetMapping("/dni/{dni}")
     public ResponseEntity<ApiResponse<ClienteResponse>> obtenerPorDni(
-            @PathVariable String dni) {
+            @PathVariable("dni") String dni) {
         return ResponseEntity.ok(ApiResponse.success("Cliente encontrado",
                 clienteService.obtenerPorDni(dni)));
     }

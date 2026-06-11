@@ -10,4 +10,4 @@ public class ClienteResponse {
     private String nombreCompleto;
     private String email;
     private String telefono;
-}
+}    
