@@ -54,9 +54,9 @@ public class PaqueteController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<PaqueteResponse>>> buscar(
-            @RequestParam(required = false) String busqueda,
-            @RequestParam(required = false) String sucursal,
-            @RequestParam(required = false) String estado) {
+            @RequestParam(name = "busqueda", required = false) String busqueda,
+            @RequestParam(name = "sucursal", required = false) String sucursal,
+            @RequestParam(name = "estado", required = false) String estado) {
         if (busqueda != null) {
             return ResponseEntity.ok(ApiResponse.success("Resultados",
                     paqueteService.buscarPorTexto(busqueda)));
