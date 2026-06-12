@@ -4,6 +4,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import pe.rapidocourier.clientes.client.ReniecClient;
 import pe.rapidocourier.clientes.client.ReniecResponse;
 import pe.rapidocourier.clientes.dto.request.ClienteRequest;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@RefreshScope
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;

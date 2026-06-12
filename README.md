@@ -182,3 +182,14 @@ se delega a cada servicio según su contexto de negocio.
 - **ADMIN**: puede eliminar registros, crear y actualizar paquetes
 - **OPERADOR**: puede crear y actualizar paquetes
 - **CLIENTE**: solo puede consultar sus propios paquetes
+
+## Demostración Config Server Refresh
+
+Cambiar una propiedad en el repositorio de configuración y ejecutar:
+
+```bash
+curl -X POST http://localhost:8888/actuator/refresh
+```
+
+Esto recarga las propiedades sin reiniciar el servicio. Con `@RefreshScope`
+en `ClienteService`, el token de RENIEC se actualiza en caliente.
